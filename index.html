@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Universal Unit Converter</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="background"></div>
-  <div class="container">
-    <h1>Universal Unit Converter</h1>
+    <header>
+        <h1>Ultimate Unit Converter</h1>
+        <nav>
+            <a href="about.html">About Us</a> |
+            <a href="privacy.html">Privacy Policy</a> |
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </header>
 
-    <div class="converter">
-      <select id="category" onchange="updateUnitOptions()">
-        <option value="length">Length</option>
-        <option value="mass">Mass</option>
-        <option value="temperature">Temperature</option>
-        <option value="time">Time</option>
-        <option value="speed">Speed</option>
-        <option value="volume">Volume</option>
-      </select>
+    <main>
+        <section>
+            <h2>Convert Units Easily</h2>
+            <form id="converter-form">
+                <input type="number" id="inputValue" placeholder="Enter value" required>
+                <select id="inputUnit"></select>
+                <select id="outputUnit"></select>
+                <button type="submit">Convert</button>
+            </form>
+            <div id="result"></div>
+            <div id="visual-difference"></div>
+        </section>
+    </main>
 
-      <input type="number" id="inputValue" placeholder="Enter value" />
-
-      <select id="fromUnit"></select>
-      <span>to</span>
-      <select id="toUnit"></select>
-
-      <button onclick="convert()">Convert</button>
-
-      <div class="result" id="result">Result will appear here</div>
-      <div class="visual" id="visual"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2025 Ultimate Unit Converter. All rights reserved.</p>
+    </footer>
 </body>
 </html>
