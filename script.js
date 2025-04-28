@@ -1,98 +1,57 @@
+
 const units = {
-  length: {
-    meter: 1,
-    kilometer: 1000,
-    centimeter: 0.01,
-    millimeter: 0.001,
-    mile: 1609.34,
-    yard: 0.9144,
-    foot: 0.3048,
-    inch: 0.0254
-  },
-  mass: {
-    kilogram: 1,
-    gram: 0.001,
-    milligram: 0.000001,
-    pound: 0.453592,
-    ounce: 0.0283495,
-    ton: 1000
-  },
-  temperature: {
-    Celsius: "C",
-    Fahrenheit: "F",
-    Kelvin: "K"
-  },
-  time: {
-    second: 1,
-    minute: 60,
-    hour: 3600,
-    day: 86400,
-    week: 604800
-  },
-  area: {
-    'square meter': 1,
-    'square kilometer': 1000000,
-    'square mile': 2589988,
-    acre: 4046.86,
-    hectare: 10000,
-    'square foot': 0.092903
-  },
-  volume: {
-    liter: 1,
-    milliliter: 0.001,
-    gallon: 3.78541,
-    quart: 0.946353,
-    pint: 0.473176,
-    'cubic meter': 1000,
-    'cubic centimeter': 0.001
-  },
-  speed: {
-    'meter/second': 1,
-    'kilometer/hour': 0.277778,
-    'mile/hour': 0.44704
-  }
+  length: { meter: 1, kilometer: 0.001, centimeter: 100, millimeter: 1000, mile: 0.000621371, yard: 1.09361, foot: 3.28084, inch: 39.3701 },
+  mass: { kilogram: 1, gram: 1000, milligram: 1000000, pound: 2.20462, ounce: 35.274 },
+  temperature: { celsius: 'celsius', fahrenheit: 'fahrenheit', kelvin: 'kelvin' },
+  time: { second: 1, minute: 1/60, hour: 1/3600, day: 1/86400 }
 };
 
 function populateUnits() {
-  const category = document.getElementById('category').value;
+  const quantity = document.getElementById('quantity').value;
   const fromUnit = document.getElementById('fromUnit');
   const toUnit = document.getElementById('toUnit');
 
   fromUnit.innerHTML = '';
   toUnit.innerHTML = '';
 
-  if (units[category]) {
-    Object.keys(units[category]).forEach(unit => {
-      const option1 = new Option(unit, unit);
-      const option2 = new Option(unit, unit);
-      fromUnit.add(option1);
-      toUnit.add(option2);
-    });
+  for (let unit in units[quantity]) {
+    const option1 = document.createElement('option');
+    const option2 = document.createElement('option');
+    option1.value = unit;
+    option1.text = unit;
+    option2.value = unit;
+    option2.text = unit;
+    fromUnit.add(option1);
+    toUnit.add(option2);
   }
 }
 
 function convert() {
-  const category = document.getElementById('category').value;
+  const quantity = document.getElementById('quantity').value;
   const inputValue = parseFloat(document.getElementById('inputValue').value);
   const fromUnit = document.getElementById('fromUnit').value;
   const toUnit = document.getElementById('toUnit').value;
-  let result = 0;
+  let result;
 
-  if (category === 'temperature') {
+  if (quantity === 'temperature') {
     result = convertTemperature(inputValue, fromUnit, toUnit);
   } else {
-    result = inputValue * (units[category][fromUnit] / units[category][toUnit]);
+    result = inputValue / units[quantity][fromUnit] * units[quantity][toUnit];
   }
 
-  document.getElementById('result').innerText = `${inputValue} ${fromUnit} = ${result.toFixed(4)} ${toUnit}`;
+  document.getElementById('result').innerText = 'Result: ' + result;
 }
 
 function convertTemperature(value, from, to) {
   if (from === to) return value;
-  if (from === 'Celsius' && to === 'Fahrenheit') return (value * 9/5) + 32;
-  if (from === 'Fahrenheit' && to === 'Celsius') return (value - 32) * 5/9;
-  if (from === 'Celsius' && to === 'Kelvin') return value + 273.15;
-  if (from === 'Kelvin' && to === 'Celsius') return value - 273.15;
-  if (from === 'Fahrenheit' && to === 'Kelvin') return ((value - 32) * 5/9) + 273.15;
-  if (from === 'Kelvin' && to === 'Fahrenheit') return ((value - 273.15) * 9/5) + 32;
+
+  let tempInCelsius;
+  if (from === 'celsius') tempInCelsius = value;
+  else if (from === 'fahrenheit') tempInCelsius = (value - 32) * 5/9;
+  else if (from === 'kelvin') tempInCelsius = value - 273.15;
+
+  if (to === 'celsius') return tempInCelsius;
+  if (to === 'fahrenheit') return (tempInCelsius * 9/5) + 32;
+  if (to === 'kelvin') return tempInCelsius + 273.15;
 }
+populateUnits();

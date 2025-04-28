@@ -1,12 +1,45 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Privacy Policy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Converter App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Privacy Policy</h1>
-  <p>This is a basic privacy policy. We respect your privacy and do not collect personal data.</p>
-  <a href="index.html">← Back to Home</a>
+  <header>
+    <h1>Unit Converter</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="converter">
+      <h2>Convert Units</h2>
+      <label for="quantity">Quantity Type:</label>
+      <select id="quantity" onchange="populateUnits()">
+        <option value="length">Length</option>
+        <option value="mass">Mass</option>
+        <option value="temperature">Temperature</option>
+        <option value="time">Time</option>
+      </select>
+
+      <div class="conversion-inputs">
+        <input type="number" id="inputValue" placeholder="Enter value">
+        <select id="fromUnit"></select>
+        <span>to</span>
+        <select id="toUnit"></select>
+      </div>
+
+      <button onclick="convert()">Convert</button>
+      <div id="result"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
