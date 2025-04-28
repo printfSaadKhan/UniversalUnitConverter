@@ -1,109 +1,98 @@
-
-const unitCategories = {
+const units = {
   length: {
     meter: 1,
-    kilometer: 0.001,
-    mile: 0.000621371,
-    inch: 39.3701,
-    foot: 3.28084,
-    centimeter: 100
+    kilometer: 1000,
+    centimeter: 0.01,
+    millimeter: 0.001,
+    mile: 1609.34,
+    yard: 0.9144,
+    foot: 0.3048,
+    inch: 0.0254
   },
   mass: {
-    gram: 1,
-    kilogram: 0.001,
-    pound: 0.00220462,
-    ounce: 0.035274,
-    tonne: 0.000001
+    kilogram: 1,
+    gram: 0.001,
+    milligram: 0.000001,
+    pound: 0.453592,
+    ounce: 0.0283495,
+    ton: 1000
   },
   temperature: {
-    celsius: 'celsius',
-    fahrenheit: 'fahrenheit',
-    kelvin: 'kelvin'
+    Celsius: "C",
+    Fahrenheit: "F",
+    Kelvin: "K"
   },
   time: {
     second: 1,
-    minute: 1/60,
-    hour: 1/3600,
-    day: 1/86400
+    minute: 60,
+    hour: 3600,
+    day: 86400,
+    week: 604800
   },
-  speed: {
-    "m/s": 1,
-    "km/h": 3.6,
-    "mph": 2.23694,
-    "knot": 1.94384
+  area: {
+    'square meter': 1,
+    'square kilometer': 1000000,
+    'square mile': 2589988,
+    acre: 4046.86,
+    hectare: 10000,
+    'square foot': 0.092903
   },
   volume: {
     liter: 1,
-    milliliter: 1000,
-    gallon: 0.264172,
-    cup: 4.22675
+    milliliter: 0.001,
+    gallon: 3.78541,
+    quart: 0.946353,
+    pint: 0.473176,
+    'cubic meter': 1000,
+    'cubic centimeter': 0.001
+  },
+  speed: {
+    'meter/second': 1,
+    'kilometer/hour': 0.277778,
+    'mile/hour': 0.44704
   }
 };
 
-function updateUnitOptions() {
-  const category = document.getElementById("category").value;
-  const fromSelect = document.getElementById("fromUnit");
-  const toSelect = document.getElementById("toUnit");
+function populateUnits() {
+  const category = document.getElementById('category').value;
+  const fromUnit = document.getElementById('fromUnit');
+  const toUnit = document.getElementById('toUnit');
 
-  fromSelect.innerHTML = "";
-  toSelect.innerHTML = "";
+  fromUnit.innerHTML = '';
+  toUnit.innerHTML = '';
 
-  const units = Object.keys(unitCategories[category]);
-  units.forEach(unit => {
-    const opt1 = new Option(unit, unit);
-    const opt2 = new Option(unit, unit);
-    fromSelect.add(opt1);
-    toSelect.add(opt2);
-  });
+  if (units[category]) {
+    Object.keys(units[category]).forEach(unit => {
+      const option1 = new Option(unit, unit);
+      const option2 = new Option(unit, unit);
+      fromUnit.add(option1);
+      toUnit.add(option2);
+    });
+  }
 }
 
 function convert() {
-  const category = document.getElementById("category").value;
-  const input = parseFloat(document.getElementById("inputValue").value);
-  const from = document.getElementById("fromUnit").value;
-  const to = document.getElementById("toUnit").value;
-  const resultEl = document.getElementById("result");
-  const visualEl = document.getElementById("visual");
+  const category = document.getElementById('category').value;
+  const inputValue = parseFloat(document.getElementById('inputValue').value);
+  const fromUnit = document.getElementById('fromUnit').value;
+  const toUnit = document.getElementById('toUnit').value;
+  let result = 0;
 
-  if (isNaN(input)) {
-    resultEl.textContent = "Please enter a valid number.";
-    visualEl.innerHTML = "";
-    return;
-  }
-
-  let result;
-
-  if (category === "temperature") {
-    result = convertTemperature(input, from, to);
+  if (category === 'temperature') {
+    result = convertTemperature(inputValue, fromUnit, toUnit);
   } else {
-    result = input * (unitCategories[category][to] / unitCategories[category][from]);
+    result = inputValue * (units[category][fromUnit] / units[category][toUnit]);
   }
 
-  resultEl.textContent = `${input} ${from} = ${result.toFixed(4)} ${to}`;
-
-  const maxWidth = 300;
-  const base = Math.min(input * 5, maxWidth);
-  const converted = Math.min(result * 5, maxWidth);
-
-  visualEl.innerHTML = `
-    <div class="bar" style="width:${base}px; background:#6c757d;">${input} ${from}</div>
-    <div class="bar" style="width:${converted}px;">${result.toFixed(2)} ${to}</div>
-  `;
+  document.getElementById('result').innerText = `${inputValue} ${fromUnit} = ${result.toFixed(4)} ${toUnit}`;
 }
 
 function convertTemperature(value, from, to) {
   if (from === to) return value;
-  if (from === "celsius") {
-    if (to === "fahrenheit") return value * 9/5 + 32;
-    if (to === "kelvin") return value + 273.15;
-  }
-  if (from === "fahrenheit") {
-    if (to === "celsius") return (value - 32) * 5/9;
-    if (to === "kelvin") return (value - 32) * 5/9 + 273.15;
-  }
-  if (from === "kelvin") {
-    if (to === "celsius") return value - 273.15;
-    if (to === "fahrenheit") return (value - 273.15) * 9/5 + 32;
-  }
+  if (from === 'Celsius' && to === 'Fahrenheit') return (value * 9/5) + 32;
+  if (from === 'Fahrenheit' && to === 'Celsius') return (value - 32) * 5/9;
+  if (from === 'Celsius' && to === 'Kelvin') return value + 273.15;
+  if (from === 'Kelvin' && to === 'Celsius') return value - 273.15;
+  if (from === 'Fahrenheit' && to === 'Kelvin') return ((value - 32) * 5/9) + 273.15;
+  if (from === 'Kelvin' && to === 'Fahrenheit') return ((value - 273.15) * 9/5) + 32;
 }
-updateUnitOptions();
