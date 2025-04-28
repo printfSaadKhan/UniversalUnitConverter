@@ -1,44 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Unit Converter</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Best Online Unit Converter for Length, Weight, Temperature, Time, and more! Fast and easy conversions.">
-    <meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, online converter, measurement converter">
-    <meta name="author" content="Your Name">
-
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Universal Unit Converter</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Ultimate Unit Converter</h1>
-        <nav>
-            <a href="about.html">About Us</a> |
-            <a href="privacy.html">Privacy Policy</a> |
-            <a href="contact.html">Contact Us</a>
-        </nav>
-    </header>
+  <div class="background"></div>
+  <div class="container">
+    <h1>Universal Unit Converter</h1>
 
-    <main>
-        <section>
-            <h2>Convert Units Easily</h2>
-            <form id="converter-form">
-                <input type="number" id="inputValue" placeholder="Enter value" required>
-                <select id="inputUnit"></select>
-                <select id="outputUnit"></select>
-                <button type="submit">Convert</button>
-            </form>
-            <div id="result"></div>
-            <div id="visual-difference"></div>
-        </section>
-    </main>
+    <div class="converter">
+      <select id="category" onchange="updateUnitOptions()">
+        <option value="length">Length</option>
+        <option value="mass">Mass</option>
+        <option value="temperature">Temperature</option>
+        <option value="time">Time</option>
+        <option value="speed">Speed</option>
+        <option value="volume">Volume</option>
+      </select>
 
-    <footer>
-        <p>&copy; 2025 Ultimate Unit Converter. All rights reserved.</p>
-    </footer>
+      <input type="number" id="inputValue" placeholder="Enter value" />
+
+      <select id="fromUnit"></select>
+      <span>to</span>
+      <select id="toUnit"></select>
+
+      <button onclick="convert()">Convert</button>
+
+      <div class="result" id="result">Result will appear here</div>
+      <div class="visual" id="visual"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
