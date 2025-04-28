@@ -1,80 +1,92 @@
+
+/* style.css */
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+    margin: 0;
+    padding: 0;
 }
 
-.background {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
-  background-size: cover;
-  z-index: -1;
-  filter: blur(3px) brightness(0.7);
+header {
+    background-color: #0a74da;
+    padding: 20px;
+    text-align: center;
+    color: white;
 }
 
-.container {
-  max-width: 500px;
-  margin: 50px auto;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  text-align: center;
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
 }
 
-h1 {
-  margin-bottom: 20px;
+nav {
+    margin-top: 10px;
 }
 
-.converter {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 30px;
+    text-align: center;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-top: 20px;
 }
 
 input, select, button {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 12px;
+    width: 90%;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
 button {
-  background: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
+    background-color: #0a74da;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 button:hover {
-  background: #218838;
+    background-color: #064a91;
 }
 
-.result {
-  margin-top: 15px;
-  font-weight: bold;
-  font-size: 18px;
+#result {
+    margin-top: 20px;
+    font-size: 1.4em;
+    color: #333;
 }
 
-.visual {
-  margin-top: 20px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+#visual-difference {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #555;
 }
 
-.bar {
-  height: 30px;
-  background: #007bff;
-  border-radius: 6px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  white-space: nowrap;
-  padding: 0 8px;
+footer {
+    margin-top: 50px;
+    background-color: #0a74da;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9em;
 }
